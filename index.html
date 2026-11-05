@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JobReady — Career Platform</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <div class="brand-mark">✦</div>
+      <p class="eyebrow">JOB-READY CAREER PLATFORM</p>
+      <h1>Stop guessing.<br><span>Start getting shortlisted.</span></h1>
+      <p class="muted">Build your resume, discover opportunities, and prepare for your next interview.</p>
+      <label>Email address</label><input id="loginEmail" type="email" placeholder="you@example.com">
+      <label>Password</label><input id="loginPassword" type="password" placeholder="Enter your password">
+      <button class="primary full" id="loginBtn">Continue →</button>
+      <p class="small muted center">Demo mode · Enter any email and password</p>
+    </div>
+    <div class="login-side">
+      <span class="pill">✦ AI Career Assistant</span>
+      <h2>Build with conversations.<br>Grow with confidence.</h2>
+      <p>Get resume feedback, career guidance and practical interview preparation in one place.</p>
+      <div class="chat-demo"><b>AI Chat ✨</b><p>Tell me about your experience and the role you're targeting.</p><div class="chat-bubble">I'm looking for a software development role and want to improve my resume.</div><div class="chat-bubble purple-bubble">Let's build a strong profile and make your next move count.</div></div>
+    </div>
+  </div>
+
+  <div id="app" class="app hidden">
+    <aside class="sidebar">
+      <div class="logo"><span>✦</span><b>jobready</b></div>
+      <nav>
+        <button class="nav-item active" data-page="dashboard"><i>▦</i> Dashboard</button>
+        <button class="nav-item" data-page="jobs"><i>⌕</i> Find Jobs</button>
+        <button class="nav-item" data-page="community"><i>◉</i> Community</button>
+        <button class="nav-item" data-page="career"><i>✧</i> Career Intelligence</button>
+        <button class="nav-item" data-page="resume"><i>▤</i> Resume Builder</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="avatar">G</div><div><b>Gautam Jha</b><small>Free account</small></div><button id="logoutBtn" title="Sign out">↗</button></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar"><div><span class="muted">Workspace</span><b id="pageCrumb"> / Dashboard</b></div><div class="top-actions"><span class="status-dot"></span><span>Career profile</span><button class="icon-btn">🔔</button><div class="avatar mini">G</div></div></header>
+
+      <section id="dashboardPage" class="page">
+        <div class="hero-banner">
+          <div><span class="pill">✦ Your next opportunity starts here</span><h1>Maximize your interview chances with a resume<br>that actually gets shortlisted.</h1><p>Build an ATS-optimized resume, discover opportunities and prepare with AI.</p></div>
+          <button class="primary" data-go="resume">Create a New Resume ↗</button>
+        </div>
+        <div class="section-heading"><div><h2>Continue where you left off</h2><p class="muted">Pick up from your recent work.</p></div><button class="ghost" data-go="resume">View all →</button></div>
+        <div class="searchbar"><span>⌕</span><input placeholder="Search your resumes..." id="resumeSearch"></div>
+        <div class="table-card"><table><thead><tr><th>Name</th><th>Readiness Rating</th><th>Actions</th><th>Updated At</th></tr></thead><tbody id="resumeRows"></tbody></table><div class="table-footer">Showing <span id="resumeCount">0</span> resumes <span>Page 1 of 1</span></div></div>
+      </section>
+
+      <section id="jobsPage" class="page hidden">
+        <div class="page-title"><div><h1>Discover your ideal career right here!</h1><p class="muted">Explore roles that match your skills and career goals.</p></div><button class="primary" data-go="career">✧ Career insights</button></div>
+        <div class="filters"><input id="jobSearch" placeholder="Search job title or keyword"><select id="jobType"><option value="">All job types</option><option>Full-time</option><option>Internship</option><option>Remote</option></select><select id="jobLevel"><option value="">All experience</option><option>Entry Level</option><option>Mid Level</option></select><button class="primary" id="filterJobs">Search</button></div>
+        <div id="jobGrid" class="job-grid"></div>
+      </section>
+
+      <section id="communityPage" class="page hidden">
+        <div class="page-title"><div><h1>Learn from candidates, ask questions, build credibility.</h1><p class="muted">Share knowledge and learn from the community.</p></div></div>
+        <div class="community-layout"><div><div class="composer"><textarea id="postInput" placeholder="What's on your mind? Share a question or insight..."></textarea><div class="composer-bottom"><span class="muted small">Be helpful. Be respectful.</span><button class="primary" id="postBtn">Publish post</button></div></div><div id="posts"></div></div><aside class="right-card"><h3>Your reputation</h3><h1>0</h1><p class="muted">Community points</p><button class="primary full" id="newPostBtn">＋ Create New Post</button><hr><h3>Trending topics</h3><p># Data Science</p><p># Interview Preparation</p><p># Software Development</p></aside></div>
+      </section>
+
+      <section id="careerPage" class="page hidden">
+        <div class="page-title"><div><h1>Career Intelligence</h1><p class="muted">Understand your profile and identify your next best move.</p></div></div>
+        <div class="tabs"><button class="tab active" data-tab="insights">✦ Insights</button><button class="tab" data-tab="compare">◎ Compare</button></div>
+        <div id="insightsPanel" class="career-panel"><h2>Let's unlock your career potential</h2><p class="muted">Upload your LinkedIn PDF or resume to get a personalized career analysis.</p><div class="upload-box"><div class="upload-icon">⇧</div><h3>Drop your LinkedIn PDF here or browse</h3><p class="muted">PDF files · Maximum 10 MB</p><input id="careerFile" type="file" accept=".pdf,.doc,.docx"></div><button class="primary" id="analyzeBtn">Analyze my profile</button><p id="analysisStatus" class="muted small"></p></div>
+        <div id="comparePanel" class="career-panel hidden"><h2>Compare your career options</h2><p class="muted">Choose a target role to see the skills you should focus on.</p><select id="targetRole"><option>Data Analyst</option><option>Frontend Developer</option><option>Backend Developer</option><option>Data Scientist</option></select><button class="primary" id="compareBtn">Show skill roadmap</button><div id="roadmap" class="roadmap"></div></div>
+      </section>
+
+      <section id="resumePage" class="page hidden">
+        <div class="page-title"><div><h1>Resume Studio</h1><p class="muted">Create, edit and optimize your professional resume.</p></div><button class="primary" id="createResumeBtn">＋ Create New Resume</button></div>
+        <div class="editor-layout"><div class="editor-controls"><div class="score-card"><span class="muted">Readiness Rating</span><strong id="score">--</strong><div class="score-track"><span id="scoreBar"></span></div><small class="muted" id="scoreText">Complete your details to calculate your score.</small></div>
+          <div class="form-section"><h3>Personal Information</h3><label>Full name</label><input id="fullName" value="Gautam Kumar Jha"><label>Email</label><input id="email" placeholder="gautam@example.com"><label>Phone</label><input id="phone" placeholder="+91 00000 00000"><label>Location</label><input id="location" placeholder="Muzaffarpur, Bihar"><label>Professional summary</label><textarea id="summary" rows="3" placeholder="Write a short professional summary..."></textarea></div>
+          <div class="form-section"><h3>Work Experience</h3><label>Experience / internship</label><textarea id="experience" rows="3" placeholder="Role, company, dates and key achievements..."></textarea></div>
+          <div class="form-section"><h3>Education</h3><label>Education details</label><textarea id="education" rows="2" placeholder="Degree, college, graduation year..."></textarea></div>
+          <div class="form-section"><h3>Skills</h3><label>Skills (comma separated)</label><textarea id="skills" rows="2" placeholder="HTML, CSS, JavaScript, Python..."></textarea></div>
+          <div class="form-section"><h3>Projects</h3><label>Projects</label><textarea id="projects" rows="3" placeholder="Project name — description, technologies and impact..."></textarea></div>
+          <div class="form-actions"><button class="ghost" id="saveResume">Save draft</button><button class="primary" id="downloadResume">Download PDF</button></div>
+        </div><div class="preview-wrap"><div class="preview-toolbar"><b>Live preview</b><span class="muted small">A4 · Professional</span></div><article id="resumePreview" class="resume-paper"></article></div></div>
+      </section>
+    </main>
+    <div id="modal" class="modal hidden"><div class="modal-box"><button class="modal-close" id="closeModal">×</button><h2>Create your resume</h2><p class="muted">Start with a blank resume or upload an existing one.</p><div class="modal-options"><button id="blankResume"><b>＋</b><strong>Start from scratch</strong><small>Build a new resume</small></button><label class="upload-option"><b>⇧</b><strong>Upload resume</strong><small>PDF or DOCX file<input type="file" accept=".pdf,.doc,.docx"></small></label></div></div></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
